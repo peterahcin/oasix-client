@@ -1,0 +1,77 @@
+@import "../styles/colors.scss";
+@import "../styles/screens.scss";
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  justify-content: space-between;
+  width: 60%;
+  @media screen and (max-width: $large) {
+    width: 100%;
+  }
+  .link {
+    margin: 0;
+    font-weight: normal;
+    font-size: 20px;
+    transition: 0.4s;
+    &:hover {
+      font-weight: bolder;
+      transition: 0.4s;
+    }
+    &:active {
+      color: $teal;
+      font-weight: bolder;
+    }
+  }
+}
+
+.chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $teal;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
+.results-container {
+  width: 50%;
+  max-width: 800px;
+  min-width: 360px;
+  padding: 60px;
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  @media screen and (max-width: $small) {
+    padding: 60px;
+  }
+}
+
+.header {
+  width: 100%;
+  align-self: center;
+  background-color: white;
+}
+
+.chart {
+  width: 100%;
+  background-color: white;
+  align-self: center;
+  height: 420px;
+  @media screen and (max-width: $large) {
+    height: 330px;
+  }
+
+  @media screen and (max-width: $small) {
+    height: 240px;
+  }
+}
