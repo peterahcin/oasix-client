@@ -6,6 +6,7 @@ import { ColourOption } from "../interfaces/interfaces";
 import styles from "./Results.module.scss";
 import { AreasChart } from "./CustomChart";
 import { AreasChartWithZoom } from "./CustomChartWithZoom";
+import { Form } from "../components/forms/Form";
 
 const SERVER = process.env.REACT_APP_BASE_URL;
 
@@ -57,6 +58,7 @@ export default function Results() {
           />
         </div>
         <h3>Output</h3>
+        <Form />
         <div className={styles["chart"]}>
           <AreasChart colourOptions={selectedOptions} data={backendData} />
         </div>

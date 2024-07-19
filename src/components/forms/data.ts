@@ -1,4 +1,4 @@
-import { Form } from "../types/forms"
+import { Form } from "../../types/forms"
 
 export const FormConfigFile: Form[] = 
 [

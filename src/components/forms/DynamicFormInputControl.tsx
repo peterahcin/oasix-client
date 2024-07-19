@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useFormContext, RegisterOptions } from "react-hook-form";
-import { FormFields } from "../types/forms";
+import { FormFields } from "../../types/forms";
 import * as S from "./DynamicFormInputControl.styled";
 
 type ExtendedRegisterOptions = RegisterOptions & {
   valueAsNumber?: boolean;
 };
 
-export const DynamicControl = ({
+export const DynamicFormInputControl = ({
   inputType,
   fieldName,
   label,
@@ -15,10 +15,10 @@ export const DynamicControl = ({
   options = [],
   config = {},
   closed,
-  selectedEntry,
-}: FormFields & {
+}: // selectedEntry,
+FormFields & {
   closed: boolean;
-  selectedEntry: any;
+  // selectedEntry: any;
 }) => {
   const {
     register,
@@ -32,11 +32,12 @@ export const DynamicControl = ({
   };
 
   const initialValue =
-    selectedEntry && selectedEntry[fieldName] !== null
-      ? selectedEntry[fieldName]
-      : defaultValue;
+    // selectedEntry && selectedEntry[fieldName] !== null
+    //   ? selectedEntry[fieldName]
+    // :
+    defaultValue;
 
-  const [inputValue, setInputValue] = useState<number | undefined>(
+  const [inputValue, setInputValue] = useState<any>(
     initialValue !== null ? initialValue : undefined
   );
 
@@ -97,7 +98,8 @@ export const DynamicControl = ({
             {...register(fieldName, registerOptions)}
             name={fieldName}
             defaultValue={
-              selectedEntry ? selectedEntry[fieldName] : defaultValue
+              // selectedEntry ? selectedEntry[fieldName] :
+              defaultValue
             }
           />
         </S.Info>
@@ -150,10 +152,11 @@ export const DynamicControl = ({
             {...register(fieldName, registerOptions)}
             name={fieldName}
             defaultValue={
-              selectedEntry
-                ? options.find((o) => o.value === selectedEntry[fieldName])
-                    ?.value
-                : defaultValue
+              // selectedEntry
+              //   ? options.find((o) => o.value === selectedEntry[fieldName])
+              //       ?.value
+              //   :
+              defaultValue
             }
           >
             <option value={""}>{null}</option>
