@@ -1,6 +1,6 @@
 import { MultiSelectWithOptions } from "../components/inputs/MultiSelect";
 import { colourStyles } from "../components/inputs/multiSelectUtils";
-import { makeChartData, backendEnergyOptions } from "./resultUtils";
+import { makeChartData, backendEnergyOptions, data } from "./resultUtils";
 import { useEffect, useState } from "react";
 import { ColourOption } from "../interfaces/interfaces";
 import styles from "./Results.module.scss";
@@ -13,10 +13,11 @@ export default function Results() {
   const [backendData, setBackendData] = useState({});
 
   const fetchData = async () => {
-    const serverData = await fetch(SERVER + "/results");
-    const serverDataJson = await serverData.json();
-    const tmp = makeChartData(serverDataJson, ["power", "heat_pump"]);
-    setBackendData(tmp);
+    // const serverData = await fetch(SERVER + "/results");
+    // const serverDataJson = await serverData.json();
+    // const tmp = makeChartData(serverDataJson, ["power", "heat_pump"]);
+    // setBackendData(tmp);
+    setBackendData(data);
   };
 
   useEffect(() => {
@@ -39,8 +40,8 @@ export default function Results() {
       <div className={styles["results-container"]}>
         <div className={styles["header"]}>
           <div className={styles["navbar"]}>
-            <p className={styles["link"]}>Tech specs</p>
-            <p className={styles["link"]}>Simulation params</p>
+            <p className={styles["link"]}>System size</p>
+            <p className={styles["link"]}>Simulation parameters</p>
             <p
               className={styles["link"]}
               style={{ fontWeight: "bolder", color: "#14b8a6" }}
