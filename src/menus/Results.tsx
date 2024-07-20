@@ -13,11 +13,14 @@ export default function Results() {
   const [backendData, setBackendData] = useState({});
 
   const fetchData = async () => {
-    // const serverData = await fetch(SERVER + "/results");
-    // const serverDataJson = await serverData.json();
+    const serverData = await fetch(SERVER + "/api/run_simulation");
+    const serverDataJson = await serverData.json();
+    console.log(serverDataJson);
+    const tmp = serverDataJson;
     // const tmp = makeChartData(serverDataJson, ["power", "heat_pump"]);
-    // setBackendData(tmp);
-    setBackendData(data);
+    setBackendData(tmp);
+    // setBackendData(data);
+    // console.log(data)
   };
 
   useEffect(() => {
