@@ -81,3 +81,33 @@
     height: 240px;
   }
 }
+
+
+.btn {
+  border: 1px solid transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding: .5rem 1rem;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.btn-primary {
+  @extend .btn;
+  background-color: #2ea44f;
+  background-image: var(--bs-gradient);
+  border-color: #2ea44f;
+  box-shadow: 0 1px 1px rgba(18,21,26,.075);
+  color: #fff;
+  width: 100%;
+}

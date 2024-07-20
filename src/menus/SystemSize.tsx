@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from "react";
-import { ColourOption } from "../interfaces/interfaces";
 import styles from "./Results.module.scss";
 
 const SERVER = process.env.REACT_APP_BASE_URL;
@@ -24,6 +23,9 @@ export default function SystemSize() {
             <p className={styles["link"]}>Results</p>
           </div>
             <h1 style={{ marginBottom: 10 }}>Energy streams</h1>
+            <div className="d-grid">
+                <button className={styles["btn-primary"]} type="button">Save</button>
+            </div>
       </div>
       </div>
     </div>
