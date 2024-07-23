@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Info = styled.div`
   font-size: 16px;
-  color: #282828;
+  color: #1E1E1E;
   letter-spacing: 0.2px;
   width: 100%;
   white-space: nowrap;
@@ -12,8 +12,8 @@ export const Info = styled.div`
 
 export const InputLabelText = styled.p`
   font-size: 16px;
-  color: #282828;
-  font-weight: 600;
+  color: #1E1E1E;
+  font-weight: 500;
   letter-spacing: 0.2px;
   display: block;
   overflow: hidden;
@@ -40,10 +40,15 @@ export const Input = styled.input`
     border-width: 1px;
     box-sizing: border-box;
     height: 40px;
+    padding: 8px;
 `;
 
 export const Select = styled.select`
-  border: 2px solid #282828;
-  border-radius: 4px;
+    background-color: white;
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
   padding: 8px;
+  min-height: 40px;
 `;

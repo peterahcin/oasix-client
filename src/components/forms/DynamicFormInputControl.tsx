@@ -31,11 +31,7 @@ FormFields & {
     ...(inputType === "number" && { valueAsNumber: true }),
   };
 
-  const initialValue =
-    // selectedEntry && selectedEntry[fieldName] !== null
-    //   ? selectedEntry[fieldName]
-    // :
-    defaultValue;
+  const initialValue = defaultValue;
 
   const [inputValue, setInputValue] = useState<any>(
     initialValue !== null ? initialValue : undefined
@@ -97,10 +93,7 @@ FormFields & {
             type="text"
             {...register(fieldName, registerOptions)}
             name={fieldName}
-            defaultValue={
-              // selectedEntry ? selectedEntry[fieldName] :
-              defaultValue
-            }
+            defaultValue={defaultValue}
           />
         </S.Info>
       );
@@ -151,13 +144,7 @@ FormFields & {
             disabled={closed}
             {...register(fieldName, registerOptions)}
             name={fieldName}
-            defaultValue={
-              // selectedEntry
-              //   ? options.find((o) => o.value === selectedEntry[fieldName])
-              //       ?.value
-              //   :
-              defaultValue
-            }
+            defaultValue={defaultValue}
           >
             <option value={""}>{null}</option>
             {options?.map((o, index: number) => (

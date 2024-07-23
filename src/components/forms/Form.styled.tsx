@@ -50,6 +50,7 @@ export const Button = styled.button`
   letter-spacing: 0.1rem;
   box-shadow: 0px 2px 6px #282828;
   border: none;
+  font-size: 16px;
   font-weight: 600;
   line-height: 100%;
   white-space: nowrap;

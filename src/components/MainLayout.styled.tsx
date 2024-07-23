@@ -36,6 +36,8 @@ export const SubContainer = styled.div`
 
 export const Header = styled.header`
   width: 100%;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #c0c0c0;
 `;
 
 export const Navbar = styled.nav`
