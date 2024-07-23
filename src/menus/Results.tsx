@@ -36,12 +36,14 @@ export default function Results() {
   return (
     <>
       <h1 style={{ marginBottom: 10 }}>Energy streams</h1>
-      <MultiSelectWithOptions
-        defaultValues={[backendEnergyOptions[0]]}
-        handleChange={handleChange}
-        colourOptions={backendEnergyOptions}
-        colourStyles={colourStyles}
-      />
+      <div style={{ minWidth: "300px" }}>
+        <MultiSelectWithOptions
+          defaultValues={[backendEnergyOptions[0]]}
+          handleChange={handleChange}
+          colourOptions={backendEnergyOptions}
+          colourStyles={colourStyles}
+        />
+      </div>
 
       <h3>Output</h3>
 
