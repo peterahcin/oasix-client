@@ -4,7 +4,7 @@ export const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 `;
 
 export const InfoSection = styled.section`
@@ -12,6 +12,7 @@ export const InfoSection = styled.section`
   gap: 8px;
   display: flex;
   flex-direction: column;
+  margin-top: 32px;
 `;
 
 export const CenterHeaderDiv = styled.div`
@@ -44,18 +45,23 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   padding: 16px 32px !important;
-
-  border-radius: 24px;
-
+  background-color: #5e81f2;
+  border-radius: 8px;
   letter-spacing: 0.1rem;
-
-  /* font-family: "PoppinsRegular"; */
+  box-shadow: 0px 2px 6px #282828;
   border: none;
   font-weight: 600;
   line-height: 100%;
   white-space: nowrap;
+  width: 152px;
+  height: 40px;
   cursor: pointer;
   transition: transform 0.2s ease;
+
+  :hover {
+    box-shadow: 0px 4px 16px #282828;
+    background-color: #14b8a6;
+  }
 
   :active {
     transform: translateY(1px);
@@ -70,6 +76,5 @@ export const RedErrorMessageContainer = styled.div`
   color: red;
   display: flex;
   justify-content: flex-end;
-  /* font-family: "PoppinsRegular"; */
   font-size: red;
 `;

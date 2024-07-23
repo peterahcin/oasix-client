@@ -18,9 +18,7 @@ export const PageContainer = styled.div`
 `;
 
 export const SubContainer = styled.div`
-  width: 50%;
-  max-width: 800px;
-  min-width: 360px;
+  width: 65%;
   padding: 32px 64px;
   background-color: white;
   border-radius: 7px;
@@ -38,7 +36,6 @@ export const SubContainer = styled.div`
 
 export const Header = styled.header`
   width: 100%;
-  background-color: white;
 `;
 
 export const Navbar = styled.nav`
@@ -51,17 +48,14 @@ export const Navbar = styled.nav`
 
 export const NavLink = styled(NavLinkComponent)<{ isActive?: boolean }>`
   margin: 0;
-  font-weight: 600;
+  font-weight: ${({ isActive }) => (isActive ? "bolder" : "600")};
   font-size: 20px;
   transition: 0.4s;
   text-decoration: none;
+  white-space: nowrap;
   color: ${({ isActive }) => (isActive ? "#14b8a6" : "#5e81f2")};
   &:hover {
     font-weight: bolder;
     transition: 0.4s;
   }
-  /* &:active {
-    color: #14b8a6;
-    font-weight: bolder;
-  } */
 `;
