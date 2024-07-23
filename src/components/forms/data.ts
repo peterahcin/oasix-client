@@ -1,7 +1,7 @@
 export const FormConfigFile = 
 {
   newProject: {
-    label: "start_new_project",
+    label: "project",
     fields: [
       {
         fieldName: "name",
