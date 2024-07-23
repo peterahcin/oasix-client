@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Info = styled.div`
   font-size: 16px;
   color: #282828;
-  font-family: "PoppinsRegular";
+  /* font-family: "PoppinsRegular"; */
   letter-spacing: 0.2px;
   width: 100%;
   background-color: #ffff;
@@ -16,7 +16,7 @@ export const InputLabelText = styled.p`
   font-size: 16px;
   color: #282828;
   font-weight: 600;
-  font-family: "PoppinsRegular";
+  /* font-family: "PoppinsRegular"; */
   letter-spacing: 0.2px;
   display: block;
   overflow: hidden;

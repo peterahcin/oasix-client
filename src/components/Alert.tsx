@@ -19,7 +19,7 @@ export const initAlertData: AlertObj = {
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["PoppinsRegular", "sans-serif"].join(","),
+    // fontFamily: ["PoppinsRegular", "sans-serif"].join(","),
     fontSize: 16,
     body1: {
       fontSize: "16px",

@@ -75,9 +75,9 @@ export const SystemSizingForm = () => {
                   <S.InfoItem>
                     <DynamicFormInputControl closed={false} {...d} />
                   </S.InfoItem>
-                  {/* <S.RedErrorMessageContainer>
+                  <S.RedErrorMessageContainer>
                     <ErrorMessage errors={errors} name={d.fieldName} />
-                  </S.RedErrorMessageContainer> */}
+                  </S.RedErrorMessageContainer>
                 </div>
               ))}
           </FormProvider>

@@ -49,7 +49,7 @@ export const Button = styled.button`
 
   letter-spacing: 0.1rem;
 
-  font-family: "PoppinsRegular";
+  /* font-family: "PoppinsRegular"; */
   border: none;
   font-weight: 600;
   line-height: 100%;
@@ -64,4 +64,12 @@ export const Button = styled.button`
   :disabled {
     cursor: auto;
   }
+`;
+
+export const RedErrorMessageContainer = styled.div`
+  color: red;
+  display: flex;
+  justify-content: flex-end;
+  /* font-family: "PoppinsRegular"; */
+  font-size: red;
 `;
