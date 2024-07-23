@@ -11,7 +11,7 @@ import { FormConfigFile } from "../components/forms/data";
 import AlertMessage, { AlertObj, initAlertData } from "../components/Alert";
 import * as S from "../components/forms/Form.styled";
 
-export const SystemSizingForm = () => {
+export const SimulationParametersForm = () => {
   const formMethods = useForm();
   const {
     handleSubmit,
@@ -19,7 +19,7 @@ export const SystemSizingForm = () => {
     formState: { isSubmitting, errors },
   } = formMethods;
   const [selectedForm, setSelectedForm] = useState<any>(
-    FormConfigFile.systemSizing
+    FormConfigFile.simulationParameters
   );
   const [isShowingAlert, setShowingAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState<AlertObj>(initAlertData);

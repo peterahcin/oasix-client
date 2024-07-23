@@ -7,8 +7,9 @@ export default function MainLayout() {
       <S.SubContainer>
         <S.Header>
           <S.Navbar>
+            <S.NavLink to="/">Start New Project</S.NavLink>
             <S.NavLink to="/system-sizing">System Sizing</S.NavLink>
-            <S.NavLink to="/">Simulation params</S.NavLink>
+            <S.NavLink to="/simulation-parameters">Simulation Params</S.NavLink>
             <S.NavLink
               to="/results"
               style={{ fontWeight: "bolder", color: "#14b8a6" }}
