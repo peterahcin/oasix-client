@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 // import { ErrorMessage } from "@hookform/error-message";
 import { FormProvider, useForm } from "react-hook-form";
 // import { FormWithEditableGroupFormIDAndNoAssociatedYear } from "../FormGenerator";
-import { DynamicFormInputControl } from "./DynamicFormInputControl";
+import { DynamicFormInputControl } from "../components/forms/DynamicFormInputControl";
 // import { createData, editData } from "../../api/rest/data";
 // import { DataPayload } from "../../api/models/payload/data";
 // import { fetchTemplate } from "../../api/rest/forms";
-import { FormEntryObject } from "../../types/data";
-import { FormFields } from "../../types/forms";
-import { FormConfigFile } from "./data";
-import * as S from "./Form.styled";
+import { FormEntryObject } from "../types/data";
+import { FormFields } from "../types/forms";
+import { FormConfigFile } from "../components/forms/data";
+import * as S from "../components/forms/Form.styled";
 
-export const Form = () => {
+export const SystemSizingForm = () => {
   const formMethods = useForm();
   const {
     handleSubmit,

@@ -3,10 +3,8 @@ import { colourStyles } from "../components/inputs/multiSelectUtils";
 import { makeChartData, backendEnergyOptions } from "./resultUtils";
 import { useEffect, useState } from "react";
 import { ColourOption } from "../interfaces/interfaces";
-import styles from "./Results.module.scss";
-import { AreasChart } from "./CustomChart";
-import { AreasChartWithZoom } from "./CustomChartWithZoom";
-import { Form } from "../components/forms/Form";
+import { AreasChart } from "../components/charts/CustomChart";
+import { AreasChartWithZoom } from "../components/charts/CustomChartWithZoom";
 
 const SERVER = process.env.REACT_APP_BASE_URL;
 
@@ -36,39 +34,20 @@ export default function Results() {
   };
 
   return (
-    <div className={styles["results"]}>
-      <div className={styles["results-container"]}>
-        <div className={styles["header"]}>
-          <div className={styles["navbar"]}>
-            <p className={styles["link"]}>Tech specs</p>
-            <p className={styles["link"]}>Simulation params</p>
-            <p
-              className={styles["link"]}
-              style={{ fontWeight: "bolder", color: "#14b8a6" }}
-            >
-              Results
-            </p>
-          </div>
-          <h1 style={{ marginBottom: 10 }}>Energy streams</h1>
-          <MultiSelectWithOptions
-            defaultValues={[backendEnergyOptions[0]]}
-            handleChange={handleChange}
-            colourOptions={backendEnergyOptions}
-            colourStyles={colourStyles}
-          />
-        </div>
-        <h3>Output</h3>
-        <Form />
-        <div className={styles["chart"]}>
-          <AreasChart colourOptions={selectedOptions} data={backendData} />
-        </div>
-        <div className={styles["chart"]}>
-          <AreasChartWithZoom
-            colourOptions={selectedOptions}
-            data={backendData}
-          />
-        </div>
-      </div>
-    </div>
+    <>
+      <h1 style={{ marginBottom: 10 }}>Energy streams</h1>
+      <MultiSelectWithOptions
+        defaultValues={[backendEnergyOptions[0]]}
+        handleChange={handleChange}
+        colourOptions={backendEnergyOptions}
+        colourStyles={colourStyles}
+      />
+
+      <h3>Output</h3>
+
+      <AreasChart colourOptions={selectedOptions} data={backendData} />
+
+      <AreasChartWithZoom colourOptions={selectedOptions} data={backendData} />
+    </>
   );
 }
