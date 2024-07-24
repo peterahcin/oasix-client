@@ -1,6 +1,6 @@
 import { MultiSelectWithOptions } from "../components/inputs/MultiSelect";
 import { colourStyles } from "../components/inputs/multiSelectUtils";
-import { makeChartData, backendEnergyOptions } from "./resultUtils";
+import { makeChartData, backendEnergyOptions, data } from "./resultUtils";
 import { useEffect, useState } from "react";
 import { ColourOption } from "../interfaces/interfaces";
 import { AreasChart } from "../components/charts/CustomChart";
@@ -12,10 +12,14 @@ export default function Results() {
   const [backendData, setBackendData] = useState({});
 
   const fetchData = async () => {
-    const serverData = await fetch(SERVER + "/results");
+    const serverData = await fetch(SERVER + "/api/run_simulation");
     const serverDataJson = await serverData.json();
-    const tmp = makeChartData(serverDataJson, ["power", "heat_pump"]);
+    console.log(serverDataJson);
+    const tmp = serverDataJson;
+    // const tmp = makeChartData(serverDataJson, ["power", "heat_pump"]);
     setBackendData(tmp);
+    // setBackendData(data);
+    // console.log(data)
   };
 
   useEffect(() => {

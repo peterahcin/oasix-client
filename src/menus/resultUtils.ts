@@ -1,18 +1,18 @@
 import { ColourOption } from "../interfaces/interfaces";
-// import dataSet from "../assets/datasets/measuredData.json";
+import dataSet from "../assets/datasets/measuredData.json";
 
-// interface AreasProps {
-//   colourOptions: ColourOption[];
-// }
+interface AreasProps {
+  colourOptions: ColourOption[];
+}
 
-// let data = dataSet["dates"].map((val, idx) => {
-//   return {
-//     name: val,
-//     power: dataSet["power"][idx],
-//     signal2: dataSet["signal2"][idx] + 800,
-//     signal3: dataSet["signal2"][idx] * 0.2 + 5800,
-//   };
-// });
+export let data = dataSet["dates"].map((val, idx) => {
+  return {
+    name: val,
+    power: dataSet["power"][idx],
+    heat_pump: dataSet["signal2"][idx] + 800,
+    signal3: dataSet["signal2"][idx] * 0.2 + 5800,
+  };
+});
 
 export const energyColourOptions: readonly ColourOption[] = [
   { value: "power", label: "power", color: "#00B8D9", isFixed: true },
@@ -35,9 +35,9 @@ export const defaultChartColorOptions: ColourOption[] = [
 
 export const backendEnergyOptions: ColourOption[] = [
   { value: "power", label: "power", color: "#00B8D9", isFixed: true },
-  { value: "heat_pump", label: "heat_pump", color: "#0052CC" },
-  // { value: "purple", label: "Purple", color: "#5243AA" },
-  // { value: "red", label: "Red", color: "#FF5630" },
+  { value: "heat pump", label: "heat pump", color: "#0052CC" },
+  { value: "cooling", label: "cooling", color: "#5243AA" },
+  { value: "heating", label: "heating", color: "#FF5630" },
   // { value: "orange", label: "Orange", color: "#FF8B00" },
   // { value: "yellow", label: "Yellow", color: "#FFC400" },
   // { value: "green", label: "Green", color: "#36B37E" },
