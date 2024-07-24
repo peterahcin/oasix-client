@@ -1,5 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./components/MainLayout";
+import { NewProjectForm } from "./menus/NewProjectForm";
+import { SystemSizingForm } from "./menus/SystemSizingForm";
+import SystemSize from "./menus/SystemSize";
 import Results from "./menus/Results";
+import { SimulationParametersForm } from "./menus/SimulationParametersForm";
 
 function App() {
   return (
