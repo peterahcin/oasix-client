@@ -35,10 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #50E3C2;
-  background-image: 
-      radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%), 
-      radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+  background-color: $teal;
   height: 100%;
   width: 100%;
   position: fixed;
@@ -49,14 +46,11 @@
   max-width: 800px;
   min-width: 360px;
   padding: 60px;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 12px;
-  border: 1px solid rgba(209, 213, 219, 0.3);
-  // display: flex;
-  // justify-content: center;
-  // flex-direction: column;
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   @media screen and (max-width: $small) {
     padding: 60px;
   }
@@ -65,12 +59,12 @@
 .header {
   width: 100%;
   align-self: center;
-  // background-color: white;
+  background-color: white;
 }
 
 .chart {
   width: 100%;
-  // background-color: white;
+  background-color: white;
   align-self: center;
   height: 420px;
   @media screen and (max-width: $large) {
