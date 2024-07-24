@@ -13,6 +13,7 @@ export default function Results() {
 
   const fetchData = async () => {
     const serverData = await fetch(SERVER + "/api/run_simulation");
+    console.log("serverData", serverData);
     const serverDataJson = await serverData.json();
     console.log(serverDataJson);
     const tmp = serverDataJson;

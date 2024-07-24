@@ -2,16 +2,18 @@ import client from "../client";
 import { AxiosResponse } from "axios";
 import { DataPayload } from "../models/payload/data";
 import { ResponseData, FetchDataResponseData } from "../models/response/data";
+import { Form } from "../../types/forms";
+
+//GET FORM CONFIG
+export const fetchFormByLabel = (formName: string): Promise<AxiosResponse<Form>> => {
+  return client.get<Form>(`/form_config/${formName}`);
+};
 
 // GET ALL DATA
-export const fetchData = (label: string,  data: {group_id?: number, group_form_id?: number, year?: number, page?: number, size?: number}): Promise<AxiosResponse<FetchDataResponseData>> => {
+export const fetchData = (label: string,  data: {project_id?: number, page?: number, size?: number}): Promise<AxiosResponse<FetchDataResponseData>> => {
   const params: Record<string, number> = {}
 
-  //can search by group_id & year
-  if (data.group_id) params.group_id = data.group_id;
-  if (data.year) params.year = data.year
-  //or group_form_id
-  if (data.group_form_id) params.group_form_id = data.group_form_id;
+  if (data.project_id) params.project_id = data.project_id;
 
   if (data.page) params.page = data.page
   if (data.size) params.size = data.size
@@ -20,7 +22,7 @@ export const fetchData = (label: string,  data: {group_id?: number, group_form_i
 }
 
 // GET ONE DATA
-export const fetchOneData = (label: string, id: string): Promise<AxiosResponse<ResponseData>> => {
+export const fetchOneData = (label: string, id: number): Promise<AxiosResponse<ResponseData>> => {
   return client.get<ResponseData>(`/${label}/${id}`)
 }
 

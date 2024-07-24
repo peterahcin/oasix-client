@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { DataContext } from "../context/context";
 import { ErrorMessage } from "@hookform/error-message";
+import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { DynamicFormInputControl } from "../components/forms/DynamicFormInputControl";
-// import { createData, editData } from "../../api/rest/data";
-// import { fetchTemplate } from "../../api/rest/forms";
+import { createData } from "../api/rest/data";
 import { DataPayload } from "../api/models/payload/data";
 import { FormEntryObject } from "../types/data";
 import { FormFields } from "../types/forms";
-import { FormConfigFile } from "../components/forms/data";
+import { fetchFormByLabel } from "../api/rest/data";
+import { Form } from "../types/forms";
 import AlertMessage, { AlertObj, initAlertData } from "../components/Alert";
 import * as S from "../components/forms/Form.styled";
 
@@ -18,37 +20,58 @@ export const NewProjectForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = formMethods;
-  const [selectedForm, setSelectedForm] = useState<any>(
-    FormConfigFile.newProject
-  );
+  const navigate = useNavigate();
+  const { projectId, setProjectId } = useContext(DataContext);
+  const [selectedForm, setSelectedForm] = useState<null | Form>(null);
   const [isShowingAlert, setShowingAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState<AlertObj>(initAlertData);
 
   const onSubmit = async (data: FormEntryObject) => {
-    console.log("form data is", data);
-    const payload: DataPayload = {};
+    if (selectedForm) {
+      console.log("form data is", data);
+      const payload: DataPayload = {};
 
-    selectedForm.fields.forEach((field: FormFields) => {
-      if (data.hasOwnProperty(field.fieldName as keyof DataPayload)) {
-        payload[field.fieldName] =
-          //this is needed to send 0 to the database
-          field.inputType === "number"
-            ? data[field.fieldName]
-            : data[field.fieldName]
-            ? data[field.fieldName]
-            : null;
+      selectedForm.fields.forEach((field: FormFields) => {
+        if (data.hasOwnProperty(field.fieldName as keyof DataPayload)) {
+          payload[field.fieldName] =
+            field.inputType === "dropdown" && data[field.fieldName]
+              ? Number(data[field.fieldName])
+              : //this is needed to send 0 to the database
+              field.inputType === "number"
+              ? data[field.fieldName]
+              : data[field.fieldName]
+              ? data[field.fieldName]
+              : null;
+        }
+      });
+      console.log("payload is", payload);
+      try {
+        const response = await createData(selectedForm.label, payload);
+        console.log("response from creating is", response.data);
+        setProjectId(response.data.id);
+        reset();
+        navigate("/system-sizing");
+      } catch (error) {
+        console.error("Error creating new project", error);
+        setAlertMessage({
+          type: "error",
+          value: "Error creating new project.",
+        });
+        setShowingAlert(true);
       }
-    });
-    console.log("payload is", payload);
+    }
+  };
+
+  const fetchFormConfig = async () => {
     try {
-      // const response = await createData(selectedForm.label, selectedEntry.id, payload)
-      // console.log("response from creating or editing is", response);
-      reset();
+      const formConfig = await fetchFormByLabel("project");
+      console.log("formConfig response is", formConfig.data);
+      setSelectedForm(formConfig.data);
     } catch (error) {
-      console.error("Error creating or updating data.", error);
+      console.error("Error fetching form", error);
       setAlertMessage({
         type: "error",
-        value: "Something went wrong.",
+        value: "Error fetching form.",
       });
       setShowingAlert(true);
     }
@@ -63,8 +86,9 @@ export const NewProjectForm = () => {
 
   useEffect(() => {
     reset();
+    fetchFormConfig();
     // eslint-disable-next-line
-  }, [selectedForm]);
+  }, []);
 
   return (
     <S.InfoSection>
