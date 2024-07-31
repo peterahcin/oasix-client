@@ -11,6 +11,7 @@ import { FormFields } from "../types/forms";
 import { fetchFormByLabel } from "../api/rest/data";
 import { Form } from "../types/forms";
 import AlertMessage, { AlertObj, initAlertData } from "../components/Alert";
+import usePageWidth from "../customHooks/usePageWidth";
 import * as S from "../components/forms/Form.styled";
 
 export const NewProjectForm = () => {
@@ -22,6 +23,7 @@ export const NewProjectForm = () => {
   } = formMethods;
   const navigate = useNavigate();
   const { projectId, setProjectId } = useContext(DataContext);
+  const pageWidth = usePageWidth();
   const [selectedForm, setSelectedForm] = useState<null | Form>(null);
   const [isShowingAlert, setShowingAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState<AlertObj>(initAlertData);
@@ -93,7 +95,7 @@ export const NewProjectForm = () => {
   return (
     <S.InfoSection>
       <S.Form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
-        <S.GridContainer>
+        <S.GridContainer smallScreen={pageWidth <= 650}>
           <FormProvider {...formMethods}>
             {selectedForm &&
               selectedForm.fields.map((d: FormFields, i: number) => (
