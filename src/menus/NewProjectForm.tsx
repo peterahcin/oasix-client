@@ -50,7 +50,9 @@ export const NewProjectForm = () => {
       try {
         const response = await createData(selectedForm.label, payload);
         console.log("response from creating is", response.data);
-        setProjectId(response.data.id);
+        if (typeof response.data.id === "number") {
+          setProjectId(response.data.id);
+        }
         reset();
         navigate("/system-sizing");
       } catch (error) {

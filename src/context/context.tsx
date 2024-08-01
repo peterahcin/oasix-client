@@ -1,13 +1,18 @@
 import React, { createContext, useState, ReactNode } from "react";
-
-interface DataProviderProps {
-  children: ReactNode;
+interface DataContextType {
+  projectId: number | null;
+  setProjectId: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export const DataContext = createContext<any>(null);
+const defaultContextValue: DataContextType = {
+  projectId: null,
+  setProjectId: () => {},
+};
 
-export const DataProvider = ({ children }: DataProviderProps) => {
-  const [projectId, setProjectId] = useState<number | null>(null); // Initialize with null or initial ID if available
+export const DataContext = createContext<DataContextType>(defaultContextValue);
+
+export const DataProvider = ({ children }: { children: ReactNode }) => {
+  const [projectId, setProjectId] = useState<number | null>(null);
 
   return (
     <DataContext.Provider value={{ projectId, setProjectId }}>
