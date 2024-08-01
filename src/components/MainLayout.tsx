@@ -48,7 +48,7 @@ export default function MainLayout() {
 
   return (
     <S.PageContainer>
-      <S.SubContainer>
+      <S.SubContainer increasedWidth={pageWidth <= 700}>
         <S.Header>
           <S.Navbar>
             {pageWidth >= 1090 ? (

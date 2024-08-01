@@ -21,9 +21,13 @@ export const CenterHeaderDiv = styled.div`
   align-items: center;
 `;
 
-export const GridContainer = styled.div<{ smallScreen: boolean }>`
+export const GridContainer = styled.div<{
+  smallScreen: boolean;
+  oneColumn: boolean;
+}>`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: ${({ oneColumn }) =>
+    oneColumn ? "1fr" : "repeat(2, 1fr)"};
   column-gap: 2rem;
   row-gap: 1rem;
   padding: ${({ smallScreen }) => (smallScreen ? "0rem" : "0rem 2rem")};

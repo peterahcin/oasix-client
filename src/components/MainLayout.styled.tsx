@@ -19,9 +19,10 @@ export const PageContainer = styled.div`
     radial-gradient(at 82% 65%, hsl(198, 100%, 50%) 0, transparent 55%);
 `;
 
-export const SubContainer = styled.div`
-  width: 65%;
-  padding: 32px 64px;
+export const SubContainer = styled.div<{ increasedWidth: boolean }>`
+  width: ${({ increasedWidth }) => (increasedWidth ? "95%" : "65%")};
+  padding: ${({ increasedWidth }) =>
+    increasedWidth ? "16px 32px" : "32px 64px"};
   background-color: white;
   border-radius: 7px;
   display: flex;

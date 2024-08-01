@@ -94,7 +94,10 @@ export const SimulationParametersForm = () => {
   return (
     <S.InfoSection>
       <S.Form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
-        <S.GridContainer smallScreen={pageWidth <= 650}>
+        <S.GridContainer
+          smallScreen={pageWidth <= 650}
+          oneColumn={pageWidth <= 900}
+        >
           <FormProvider {...formMethods}>
             {selectedForm &&
               selectedForm.fields.map((d: FormFields, i: number) => (
