@@ -5,20 +5,15 @@ interface AreasProps {
   colourOptions: ColourOption[];
 }
 
-export let data = dataSet["dates"].map((val, idx) => {
-  return {
-    name: val,
-    power: dataSet["power"][idx],
-    heat_pump: dataSet["signal2"][idx] + 800,
-    signal3: dataSet["signal2"][idx] * 0.2 + 5800,
-  };
-});
+// export let data = dataSet["dates"].map((val, idx) => {
+//   return {
+//     name: val,
+//     power: dataSet["power"][idx],
+//     heat_pump: dataSet["signal2"][idx] + 800,
+//     signal3: dataSet["signal2"][idx] * 0.2 + 5800,
+//   };
+// });
 
-export const energyColourOptions: readonly ColourOption[] = [
-  { value: "power", label: "power", color: "#00B8D9", isFixed: true },
-  { value: "signal2", label: "signal2", color: "#0052CC" },
-  { value: "signal3", label: "signal3", color: "#5243AA" },
-];
 
 export const defaultChartColorOptions: ColourOption[] = [
   { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
@@ -34,16 +29,28 @@ export const defaultChartColorOptions: ColourOption[] = [
 ];
 
 export const backendEnergyOptions: ColourOption[] = [
-  { value: "power", label: "power", color: "#00B8D9", isFixed: true },
-  { value: "heat pump", label: "heat pump", color: "#0052CC" },
+  { value: "electricity", label: "electricity", color: "#00B8D9", isFixed: true },
+  { value: "cooling load", label: "cooling load", color: "#0052CC" },
   { value: "cooling", label: "cooling", color: "#5243AA" },
-  { value: "heating", label: "heating", color: "#FF5630" },
-  // { value: "orange", label: "Orange", color: "#FF8B00" },
-  // { value: "yellow", label: "Yellow", color: "#FFC400" },
-  // { value: "green", label: "Green", color: "#36B37E" },
-  // { value: "forest", label: "Forest", color: "#00875A" },
-  // { value: "slate", label: "Slate", color: "#253858" },
-  // { value: "silver", label: "Silver", color: "#666666" },
+  { value: "heat load", label: "heat load", color: "#FF5630" },
+  // { value: "COPh", label: "COPh", color: "#FF8B00" },
+  { value: "insolation", label: "insolation", color: "#FFC400" },
+  // { value: "COPc", label: "COPc", color: "#36B37E" },
+  // { value: "T ambient", label: "T ambient", color: "#00875A" },
+  { value: "dissipated heat", label: "dissipated heat", color: "#253858" },
+  { value: "dissipated cold", label: "dissipated cold", color: "#666666" },
+];
+
+export const TemperatureOptions: ColourOption[] = [
+  { value: "T ambient", label: "T ambient", color: "#00B8D9", isFixed: true },
+  { value: "T cold storage", label: "T cold storage", color: "#0052CC" },
+  { value: "T hot storage", label: "T hot storage", color: "#FF5630" },
+  { value: "T ambient", label: "T ambient", color: "#00875A" },
+];
+
+export const HeatPumpPerformanceOptions: ColourOption[] = [
+  { value: "COPh", label: "COPh", color: "#FF8B00" },
+  { value: "COPc", label: "COPc", color: "#36B37E" },
 ];
 
 export function makeChartData(data: any, labels: string[]) {

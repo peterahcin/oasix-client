@@ -18,7 +18,8 @@ export const ChartContainer = styled(ResponsiveContainer)`
 
 export const Chart = styled.div`
   width: 100%;
-  background-color: white;
+  // background-color: white;
+  
   align-self: center;
   height: 420px;
   @media screen and (max-width: ${Screens.large}) {
