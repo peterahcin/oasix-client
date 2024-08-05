@@ -24,9 +24,9 @@ export const AreasChartWithZoom: React.FC<AreasProps> = (props: AreasProps) => {
         <AreaChart
           onMouseDown={(e) => console.log(e)}
           data={props.data}
-          margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+          margin={{ top: 20, right: 30, left: 0, bottom: 30 }}
         >
-          <XAxis dataKey="name" allowDataOverflow />
+          <XAxis dataKey="timestamp" allowDataOverflow />
           <YAxis
             label={{ value: "[kWh]", angle: -90, position: "insideLeft" }}
             // unit={" kWh"}

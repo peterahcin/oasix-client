@@ -15,6 +15,7 @@ import { ColourOption } from "../../interfaces/interfaces";
 interface AreasProps {
   colourOptions: ColourOption[];
   data: any;
+  units?: string | null;
 }
 
 export const AreasChart: React.FC<AreasProps> = (props: AreasProps) => {
@@ -27,7 +28,8 @@ export const AreasChart: React.FC<AreasProps> = (props: AreasProps) => {
         >
           <XAxis dataKey="name" allowDataOverflow />
           <YAxis
-            label={{ value: "[kWh]", angle: -90, position: "insideLeft" }}
+            // padding={{ bottom: 20, top: 20 }}
+            label={{ value: props.units, angle: -90, position: "insideLeft" }}
             // unit={" kWh"}
             allowDataOverflow
           />
