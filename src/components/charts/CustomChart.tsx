@@ -26,7 +26,7 @@ export const AreasChart: React.FC<AreasProps> = (props: AreasProps) => {
           data={props.data}
           margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
         >
-          <XAxis dataKey="name" allowDataOverflow />
+          <XAxis dataKey="timestamp" allowDataOverflow />
           <YAxis
             // padding={{ bottom: 20, top: 20 }}
             label={{ value: props.units, angle: -90, position: "insideLeft" }}
