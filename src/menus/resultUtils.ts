@@ -5,15 +5,6 @@ interface AreasProps {
   colourOptions: ColourOption[];
 }
 
-// export let data = dataSet["dates"].map((val, idx) => {
-//   return {
-//     name: val,
-//     power: dataSet["power"][idx],
-//     heat_pump: dataSet["signal2"][idx] + 800,
-//     signal3: dataSet["signal2"][idx] * 0.2 + 5800,
-//   };
-// });
-
 
 export const defaultChartColorOptions: ColourOption[] = [
   { value: "ocean", label: "Ocean", color: "#00B8D9", isFixed: true },
@@ -49,6 +40,7 @@ export const TemperatureOptions: ColourOption[] = [
 ];
 
 export const HeatPumpPerformanceOptions: ColourOption[] = [
+  { value: "COP", label: "COP", color: "#00B8D9" },
   { value: "COPh", label: "COPh", color: "#FF8B00" },
   { value: "COPc", label: "COPc", color: "#36B37E" },
 ];

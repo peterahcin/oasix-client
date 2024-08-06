@@ -35,7 +35,7 @@ export default function MainLayout() {
 
   const getPageTitle = (path: string) => {
     if (path === "/") {
-      return "Start New Project";
+      return "Project";
     }
     let title = path.substring(1);
     title = title.replace("-", " ");
@@ -53,7 +53,7 @@ export default function MainLayout() {
           <S.Navbar>
             {pageWidth >= 1090 ? (
               <>
-                <CustomNavLink to="/">Start New Project</CustomNavLink>
+                <CustomNavLink to="/">Project</CustomNavLink>
                 <CustomNavLink to="/system-sizing">System Sizing</CustomNavLink>
                 <CustomNavLink to="/simulation-parameters">
                   Simulation Params
@@ -79,7 +79,7 @@ export default function MainLayout() {
                   <S.BurgerMenuPopover>
                     <S.BurgerMenuBox>
                       <CustomNavLink to="/" onClick={handleBurgerMenuOpenClose}>
-                        Start New Project
+                        Project
                       </CustomNavLink>
                       <CustomNavLink
                         to="/system-sizing"

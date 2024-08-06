@@ -47,6 +47,7 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   display: flex;
   justify-content: center;
+  // width: 100%;
   align-items: center;
   padding: 16px 32px !important;
   background-color: #5e81f2;
@@ -58,7 +59,7 @@ export const Button = styled.button`
   font-weight: 600;
   line-height: 100%;
   white-space: nowrap;
-  width: 152px;
+  // width: 152px;
   height: 40px;
   cursor: pointer;
   transition: transform 0.2s ease;
