@@ -101,7 +101,7 @@ export const NavLink = styled(NavLinkComponent)<{ isActive?: boolean }>`
   transition: 0.4s;
   text-decoration: none;
   white-space: nowrap;
-  color: ${({ isActive }) => (isActive ? "#14b8a6" : "#5e81f2")};
+  color: ${({ isActive }) => (isActive ? "#14b8a6" : "#09b8f9")};
   &:hover {
     font-weight: bolder;
     transition: 0.4s;

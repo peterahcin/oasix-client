@@ -1,18 +1,15 @@
 import { MultiSelectWithOptions } from "../components/inputs/MultiSelect";
 import { colourStyles } from "../components/inputs/multiSelectUtils";
-import { makeChartData, backendEnergyOptions, TemperatureOptions, HeatPumpPerformanceOptions } from "./resultUtils";
-import { useEffect, useState } from "react";
+import { backendEnergyOptions, TemperatureOptions, HeatPumpPerformanceOptions } from "./resultUtils";
+import { forwardRef, useEffect, useState } from "react";
 import { ColourOption } from "../interfaces/interfaces";
 import { AreasChart } from "../components/charts/CustomChart";
-import { AreasChartWithZoom } from "../components/charts/CustomChartWithZoom";
-import DatePicker from "react-datepicker";
+// import { AreasChartWithZoom } from "../components/charts/CustomChartWithZoom";
+import DatePicker, { CalendarContainer } from "react-datepicker";
 import * as S from "./Results.styled";
 import "react-datepicker/dist/react-datepicker.css";
-import { set } from "react-hook-form";
-
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
+// import { set } from "react-hook-form";
+import "./CustomDatePicker.css"; // Custom CSS file
 
 const SERVER = process.env.REACT_APP_BASE_URL;
 const parseDate = (date: string) => {
@@ -41,7 +38,7 @@ export default function Results() {
 
     const minDateStr = tmp[0]["timestamp"];
     const maxDateStr = tmp[tmp.length - 1]["timestamp"];
-    // console.log("minDate", parseDate(minDateStr));
+
     setMinDate(parseDate(minDateStr));
     setMaxDate(parseDate(maxDateStr));
   
@@ -96,16 +93,27 @@ export default function Results() {
 
   const handleEndDateChange = (date: Date | null) => {
     const tmp = filterData(backendData, startDate, date || maxDate);
-    console.log(tmp.length);
     setEndDate(date || maxDate);
     setDisplayedData(tmp);
   };
-  
+
   return (
     <>
     <S.DatesContainer>
-      <DatePicker selected={startDate} onChange={handleStartDateChange} minDate={minDate} maxDate={endDate}/>
-      <DatePicker selected={endDate} onChange={handleEndDateChange} minDate={startDate} maxDate={maxDate} />
+      <S.Info>
+          <S.InputLabelText>Start date</S.InputLabelText>
+          <DatePicker 
+            selected={startDate} 
+            onChange={handleStartDateChange}
+            minDate={minDate} 
+            maxDate={endDate}    
+            // calendarContainer={MyContainer}
+          />
+      </S.Info>
+      <S.Info>
+        <S.InputLabelText>End date</S.InputLabelText>
+        <DatePicker selected={endDate} onChange={handleEndDateChange} minDate={startDate} maxDate={maxDate} />
+      </S.Info>
     </S.DatesContainer>
 
       <h1 style={{ marginBottom: 10, marginTop: 40 }}>Energy streams</h1>

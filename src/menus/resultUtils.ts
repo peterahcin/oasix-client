@@ -44,16 +44,3 @@ export const HeatPumpPerformanceOptions: ColourOption[] = [
   { value: "COPh", label: "COPh", color: "#FF8B00" },
   { value: "COPc", label: "COPc", color: "#36B37E" },
 ];
-
-export function makeChartData(data: any, labels: string[]) {
-  // transforms data into format digestible for Areas chart
-  const chartData = data["DateTime"].map((val: any, idx: any) => {
-    let tmp: any = { name: val };
-    labels.map((label) => {
-      tmp = { ...tmp, [label]: data[label][idx] };
-      return;
-    });
-    return tmp;
-  });
-  return chartData;
-}

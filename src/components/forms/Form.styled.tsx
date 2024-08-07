@@ -47,13 +47,18 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   display: flex;
   justify-content: center;
-  // width: 100%;
+  width: 100%;
   align-items: center;
   padding: 16px 32px !important;
-  background-color: #5e81f2;
+  background-color: #2ea44f;
+  border-color: #2ea44f;
+  color: #fff;
   border-radius: 8px;
+  font-family: var(--bs-font-sans-serif);
   letter-spacing: 0.1rem;
-  box-shadow: 0px 2px 6px #282828;
+  // box-shadow: 0px 2px 6px #282828;
+  box-shadow: 0 1px 1px rgba(18,21,26,.075);
+  background-image: var(--bs-gradient);
   border: none;
   font-size: 16px;
   font-weight: 600;
@@ -65,8 +70,8 @@ export const Button = styled.button`
   transition: transform 0.2s ease;
 
   :hover {
-    box-shadow: 0px 4px 16px #282828;
-    background-color: #14b8a6;
+    // box-shadow: 0px 4px 16px #282828;
+    background-color: #4b5663;
   }
 
   :active {

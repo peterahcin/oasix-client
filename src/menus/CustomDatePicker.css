@@ -1,0 +1,33 @@
+/* CustomDatePicker.css */
+
+/* Make the datepicker input larger */
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  font-size: 18px; /* Increase font size */
+  height: 40px; /* Increase height */
+  border-radius: 7px; /* Round the corners */
+}
+
+/* Customize the datepicker's popup */
+.react-datepicker-popper {
+  font-size: 1.2em; /* Increase font size of the calendar */
+}
+
+/* Change the background color of the calendar */
+.react-datepicker {
+  background-color: #f0f8ff; /* Light blue background */
+}
+
+/* Change the background color of the selected date */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #09b8f9 !important; /* Dodger blue background */
+  color: white !important;
+}
+
+/* Change the background color of the header */
+.react-datepicker__header {
+  background-color: #09b8f9; /* Steel blue background */
+  color: white;
+}
