@@ -1,17 +1,17 @@
 import { MultiSelectWithOptions } from "../components/inputs/MultiSelect";
 import { colourStyles } from "../components/inputs/multiSelectUtils";
 import { backendEnergyOptions, TemperatureOptions, HeatPumpPerformanceOptions } from "./resultUtils";
-import { forwardRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ColourOption } from "../interfaces/interfaces";
 import { AreasChart } from "../components/charts/CustomChart";
 // import { AreasChartWithZoom } from "../components/charts/CustomChartWithZoom";
-import DatePicker, { CalendarContainer } from "react-datepicker";
+import DatePicker from "react-datepicker";
 import * as S from "./Results.styled";
 import "react-datepicker/dist/react-datepicker.css";
-// import { set } from "react-hook-form";
+import { runSimulation } from "../api/rest/simulation";
 import "./CustomDatePicker.css"; // Custom CSS file
+import { SimulationResults } from "../api/models/response/simulationResults";
 
-const SERVER = process.env.REACT_APP_BASE_URL;
 const parseDate = (date: string) => {
   return new Date(Number(date.substr(0, 4)), Number(date.substr(5,2)), Number(date.substr(8,2)));
 }
@@ -24,17 +24,16 @@ const filterData = (data: any, startDate: Date, endDate: Date) => {
 }
 
 export default function Results() {
-  const [backendData, setBackendData] = useState([]);
-  const [displayedData, setDisplayedData] = useState([]);
+  const [backendData, setBackendData] = useState<SimulationResults[]>([]);
+  const [displayedData, setDisplayedData] = useState<SimulationResults[]>([]);
   const [minDate, setMinDate] = useState(new Date());
   const [maxDate, setMaxDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   const fetchData = async () => {
-    const serverData = await fetch(SERVER + "/api/run_simulation");
-    const serverDataJson = await serverData.json();
-    const tmp = serverDataJson;
+    const serverData = await runSimulation();
+    const tmp = serverData.data;
 
     const minDateStr = tmp[0]["timestamp"];
     const maxDateStr = tmp[tmp.length - 1]["timestamp"];
@@ -44,7 +43,6 @@ export default function Results() {
   
     setStartDate(parseDate(minDateStr));
     setEndDate(parseDate(maxDateStr));
-  
     setBackendData(tmp);
     setDisplayedData(tmp);
   };
