@@ -1,5 +1,5 @@
-import { ColourOption } from "../interfaces/interfaces";
-import dataSet from "../assets/datasets/measuredData.json";
+import { ColourOption } from "../../../interfaces/interfaces";
+import dataSet from "../../../assets/datasets/measuredData.json";
 
 interface AreasProps {
   colourOptions: ColourOption[];

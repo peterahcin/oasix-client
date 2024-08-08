@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 
 export const Info = styled.div`
+font-family: 'Inter';
   font-size: 16px;
-  color: #1E1E1E;
+  color: rgb(75, 86, 99);
   letter-spacing: 0.2px;
   width: 100%;
   white-space: nowrap;
@@ -11,8 +12,6 @@ export const Info = styled.div`
 `;
 
 export const InputLabelText = styled.p`
-  font-size: 16px;
-  color: #1E1E1E;
   font-weight: 500;
   letter-spacing: 0.2px;
   display: block;
@@ -35,7 +34,7 @@ export const Input = styled.input`
     transition: all 100ms;
     background-color: white;
     border-color: hsl(0, 0%, 80%);
-    border-radius: 8px;
+    border-radius: 4px;
     border-style: solid;
     border-width: 1px;
     box-sizing: border-box;
@@ -46,7 +45,7 @@ export const Input = styled.input`
 export const Select = styled.select`
     background-color: white;
     border-color: hsl(0, 0%, 80%);
-    border-radius: 8px;
+    border-radius: 4px;
     border-style: solid;
     border-width: 1px;
   padding: 8px;

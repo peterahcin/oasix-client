@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { DataContext } from "../context/context";
+import { DataContext } from "../../../context/context";
 import { ErrorMessage } from "@hookform/error-message";
+import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
-import { DynamicFormInputControl } from "../components/forms/DynamicFormInputControl";
-import { createData } from "../api/rest/data";
-import { DataPayload } from "../api/models/payload/data";
-import { FormEntryObject } from "../types/data";
-import { FormFields } from "../types/forms";
-import { Form } from "../types/forms";
-import { fetchFormByLabel } from "../api/rest/data";
-import AlertMessage, { AlertObj, initAlertData } from "../components/Alert";
-import usePageWidth from "../customHooks/usePageWidth";
-import * as S from "../components/forms/Form.styled";
+import { DynamicFormInputControl } from "../../forms/DynamicFormInputControl";
+import { createData } from "../../../api/rest/data";
+import { DataPayload } from "../../../api/models/payload/data";
+import { FormEntryObject } from "../../../types/data";
+import { FormFields } from "../../../types/forms";
+import { fetchFormByLabel } from "../../../api/rest/data";
+import { Form } from "../../../types/forms";
+import AlertMessage, { AlertObj, initAlertData } from "../../Alert";
+import { fetchData } from "../../../api/rest/data";
+import usePageWidth from "../../../customHooks/usePageWidth";
+import Table from "./Table";
+import * as S from "../../forms/Form.styled";
 
-export const SimulationParametersForm = () => {
+export const NewProjectForm = () => {
   const formMethods = useForm();
   const {
     handleSubmit,
@@ -22,7 +24,7 @@ export const SimulationParametersForm = () => {
     formState: { isSubmitting, errors },
   } = formMethods;
   const navigate = useNavigate();
-  const { projectId } = useContext(DataContext);
+  const { projectId, setProjectId } = useContext(DataContext);
   const pageWidth = usePageWidth();
   const [selectedForm, setSelectedForm] = useState<null | Form>(null);
   const [isShowingAlert, setShowingAlert] = useState(false);
@@ -31,7 +33,7 @@ export const SimulationParametersForm = () => {
   const onSubmit = async (data: FormEntryObject) => {
     if (selectedForm) {
       console.log("form data is", data);
-      const payload: DataPayload = { project_id: projectId };
+      const payload: DataPayload = {};
 
       selectedForm.fields.forEach((field: FormFields) => {
         if (data.hasOwnProperty(field.fieldName as keyof DataPayload)) {
@@ -50,13 +52,16 @@ export const SimulationParametersForm = () => {
       try {
         const response = await createData(selectedForm.label, payload);
         console.log("response from creating is", response.data);
+        if (typeof response.data.id === "number") {
+          setProjectId(response.data.id);
+        }
         reset();
-        navigate("/results");
+        navigate("/system-sizing");
       } catch (error) {
-        console.error("Error saving simulation parameters", error);
+        console.error("Error creating new project", error);
         setAlertMessage({
           type: "error",
-          value: "Error saving simulation parameters.",
+          value: "Error creating new project.",
         });
         setShowingAlert(true);
       }
@@ -65,7 +70,7 @@ export const SimulationParametersForm = () => {
 
   const fetchFormConfig = async () => {
     try {
-      const formConfig = await fetchFormByLabel("simulation-parameters");
+      const formConfig = await fetchFormByLabel("project");
       console.log("formConfig response is", formConfig.data);
       setSelectedForm(formConfig.data);
     } catch (error) {
@@ -94,6 +99,7 @@ export const SimulationParametersForm = () => {
   return (
     <>
       <S.InfoSection>
+        <Table selectedForm={selectedForm} />
         <S.Form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
           <S.GridContainer
             smallScreen={pageWidth <= 650}

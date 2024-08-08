@@ -46,6 +46,7 @@ export const Header = styled.header`
 
 export const Navbar = styled.nav`
   display: flex;
+  font-family: "Inter";
   flex-direction: row;
   margin: 0px;
   justify-content: space-between;
@@ -56,6 +57,7 @@ export const Navbar = styled.nav`
 export const BurgerMenu = styled.div`
   width: 32px;
   height: 32px;
+  font-family: "Inter";
   background-color: #5e81f2;
   display: flex;
   flex-direction: column;
@@ -76,6 +78,7 @@ export const CloseX = styled(X)`
 `;
 
 export const BurgerMenuPopover = styled.div`
+  font-family: "Inter";
   position: fixed;
   top: 0;
   right: 0;
@@ -92,6 +95,7 @@ export const BurgerMenuBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  font-family: "Inter";
 `;
 
 export const NavLink = styled(NavLinkComponent)<{ isActive?: boolean }>`

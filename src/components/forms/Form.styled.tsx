@@ -30,7 +30,7 @@ export const GridContainer = styled.div<{
     oneColumn ? "1fr" : "repeat(2, 1fr)"};
   column-gap: 2rem;
   row-gap: 1rem;
-  padding: ${({ smallScreen }) => (smallScreen ? "0rem" : "0rem 2rem")};
+  /* padding: ${({ smallScreen }) => (smallScreen ? "0rem" : "0rem 2rem")}; */
 `;
 
 export const InfoItem = styled.div`
@@ -53,12 +53,15 @@ export const Button = styled.button`
   background-color: #2ea44f;
   border-color: #2ea44f;
   color: #fff;
-  border-radius: 8px;
-  font-family: var(--bs-font-sans-serif);
+  border-radius: 4px;
+  font-family: "Inter";
   letter-spacing: 0.1rem;
-  // box-shadow: 0px 2px 6px #282828;
-  box-shadow: 0 1px 1px rgba(18,21,26,.075);
-  background-image: var(--bs-gradient);
+  box-shadow: 0 1px 1px rgba(18, 21, 26, 0.075);
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0.15),
+    hsla(0, 0%, 100%, 0)
+  );
   border: none;
   font-size: 16px;
   font-weight: 600;
@@ -71,11 +74,15 @@ export const Button = styled.button`
 
   :hover {
     // box-shadow: 0px 4px 16px #282828;
-    background-color: #4b5663;
+    /* background-color: #4b5663; */
+    background-color: #289045;
+    border-color: #289045;
   }
 
   :active {
     transform: translateY(1px);
+    box-shadow: 0 1px 1px rgba(18, 21, 26, 0.075),
+      0 0 0 0.2rem rgba(77, 178, 105, 0.5);
   }
 
   :disabled {

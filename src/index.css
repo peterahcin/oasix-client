@@ -26,13 +26,12 @@ p {
   margin-block-end: 0;
 }
 
-/* @font-face {
-  font-family: "PoppinsRegular";
-  src: local("PoppinsRegular"),
-    url("./styles/fonts/Poppins-Regular.ttf") format("opentype");
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"),
+    url("./styles/fonts/Inter-VariableFont_opsz,wght.ttf") format("opentype");
   font-weight: normal;
-} */
-
+}
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-qjt5b1-MuiPaper-root-MuiPopover-paper {
   border-radius: 8px;
 }

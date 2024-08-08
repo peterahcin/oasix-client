@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { DataContext } from "../context/context";
+import { DataContext } from "../../../context/context";
 import { useNavigate } from "react-router-dom";
 import { ErrorMessage } from "@hookform/error-message";
 import { FormProvider, useForm } from "react-hook-form";
-import { DynamicFormInputControl } from "../components/forms/DynamicFormInputControl";
-import { createData } from "../api/rest/data";
-import { fetchFormByLabel } from "../api/rest/data";
-import { DataPayload } from "../api/models/payload/data";
-import { FormEntryObject } from "../types/data";
-import { FormFields } from "../types/forms";
-import { Form } from "../types/forms";
-import AlertMessage, { AlertObj, initAlertData } from "../components/Alert";
-import usePageWidth from "../customHooks/usePageWidth";
-import * as S from "../components/forms/Form.styled";
+import { DynamicFormInputControl } from "../../forms/DynamicFormInputControl";
+import { createData } from "../../../api/rest/data";
+import { fetchFormByLabel } from "../../../api/rest/data";
+import { DataPayload } from "../../../api/models/payload/data";
+import { FormEntryObject } from "../../../types/data";
+import { FormFields } from "../../../types/forms";
+import { Form } from "../../../types/forms";
+import AlertMessage, { AlertObj, initAlertData } from "../../Alert";
+import usePageWidth from "../../../customHooks/usePageWidth";
+import * as S from "../../forms/Form.styled";
 
 export const SystemSizingForm = () => {
   const formMethods = useForm();

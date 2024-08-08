@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DataProvider } from "./context/context";
 import MainLayout from "./components/MainLayout";
-import { NewProjectForm } from "./menus/NewProjectForm";
-import { SystemSizingForm } from "./menus/SystemSizingForm";
-import SystemSize from "./menus/SystemSize";
-import Results from "./menus/Results";
-import { SimulationParametersForm } from "./menus/SimulationParametersForm";
+import { NewProjectForm } from "./components/menus/project/NewProjectForm";
+import { SystemSizingForm } from "./components/menus/system-size/SystemSizingForm";
+import SystemSize from "./components/menus/system-size/SystemSize";
+import Results from "./components/menus/results/Results";
+import { SimulationParametersForm } from "./components/menus/simulation-params/SimulationParametersForm";
 
 function App() {
   return (

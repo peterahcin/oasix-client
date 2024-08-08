@@ -10,10 +10,8 @@ export const fetchFormByLabel = (formName: string): Promise<AxiosResponse<Form>>
 };
 
 // GET ALL DATA
-export const fetchData = (label: string,  data: {project_id?: number, page?: number, size?: number}): Promise<AxiosResponse<FetchDataResponseData>> => {
+export const fetchData = (label: string,  data: {page?: number, size?: number}): Promise<AxiosResponse<FetchDataResponseData>> => {
   const params: Record<string, number> = {}
-
-  if (data.project_id) params.project_id = data.project_id;
 
   if (data.page) params.page = data.page
   if (data.size) params.size = data.size

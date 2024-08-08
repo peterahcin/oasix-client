@@ -1,0 +1,56 @@
+/* Pagination */
+.pagination {
+  padding-inline-start: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Page Item */
+.page-item {
+  padding: 0 8px;
+  list-style-type: none;
+}
+
+
+/* Page Link */
+.page-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  min-width: 32px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'Inter';
+  color: #575c5d;
+}
+
+
+/* Hover */
+.page-item:hover {
+  background-color: #e0e1e1;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.page-item.end-item:hover {
+  background-color: transparent; 
+}
+
+.page-link:hover {
+  color: #232A2B;
+}
+
+/* Active */
+.page-item.active .page-link {
+  color: #232A2B;
+  font-weight: 700;
+}
+
+/* Disabled */
+.page-item.disabled .page-link {
+  color: #575c5d;
+  opacity: 0.7;
+}
+
