@@ -93,38 +93,40 @@ export const SystemSizingForm = () => {
   }, []);
 
   return (
-    <S.InfoSection>
-      <S.Form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
-        <S.GridContainer
-          smallScreen={pageWidth <= 650}
-          oneColumn={pageWidth <= 900}
-        >
-          <FormProvider {...formMethods}>
-            {selectedForm &&
-              selectedForm.fields.map((d: FormFields, i: number) => (
-                <div key={`${d.fieldName}-${i}`}>
-                  <S.InfoItem>
-                    <DynamicFormInputControl closed={false} {...d} />
-                  </S.InfoItem>
-                  <S.RedErrorMessageContainer>
-                    <ErrorMessage errors={errors} name={d.fieldName} />
-                  </S.RedErrorMessageContainer>
-                </div>
-              ))}
-          </FormProvider>
-        </S.GridContainer>
-        <S.ButtonContainer>
-          <S.Button id="right" type="submit" disabled={isSubmitting}>
-            Submit
-          </S.Button>
-        </S.ButtonContainer>
-      </S.Form>
+    <>
+      <S.InfoSection>
+        <S.Form onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
+          <S.GridContainer
+            smallScreen={pageWidth <= 650}
+            oneColumn={pageWidth <= 900}
+          >
+            <FormProvider {...formMethods}>
+              {selectedForm &&
+                selectedForm.fields.map((d: FormFields, i: number) => (
+                  <div key={`${d.fieldName}-${i}`}>
+                    <S.InfoItem>
+                      <DynamicFormInputControl closed={false} {...d} />
+                    </S.InfoItem>
+                    <S.RedErrorMessageContainer>
+                      <ErrorMessage errors={errors} name={d.fieldName} />
+                    </S.RedErrorMessageContainer>
+                  </div>
+                ))}
+            </FormProvider>
+          </S.GridContainer>
+          <S.ButtonContainer>
+            <S.Button id="right" type="submit" disabled={isSubmitting}>
+              Submit
+            </S.Button>
+          </S.ButtonContainer>
+        </S.Form>
+      </S.InfoSection>
       <AlertMessage
         type={alertMessage?.type}
         text={alertMessage?.value}
         open={isShowingAlert}
         onClose={() => setShowingAlert(false)}
       ></AlertMessage>
-    </S.InfoSection>
+    </>
   );
 };
