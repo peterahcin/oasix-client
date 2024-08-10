@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { Tooltip } from "@mui/material";
 import { DataContext } from "../../../context/context";
@@ -18,6 +19,7 @@ interface PageChangeEvent {
 }
 
 const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
+  const navigate = useNavigate();
   const [data, setData] = useState<TableDataObject[]>([]);
   const [tableHeaders, setTableHeaders] = useState<string[]>([]);
   const [listOfLongestHeaderWords, setListOfLongestHeaderWords] = useState<
@@ -40,8 +42,8 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
     handleFetchTableData(event.selected);
   };
 
-  const handleEditClick = (id: number) => {
-    setProjectId(id);
+  const handleEditClick = () => {
+    navigate("/system-sizing");
   };
 
   const handleDeleteClick = async (id: Data) => {
@@ -283,6 +285,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                             <IconBtn
                               onClick={() => {
                                 handleSetProjectId(item.project.id);
+                                handleEditClick();
                               }}
                             >
                               <S.EditSimpleIcon />
@@ -297,6 +300,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                             <IconBtn
                               onClick={() => {
                                 handleSetProjectId(item.project.id);
+                                navigate("/results");
                               }}
                             >
                               <S.ViewSimpleIcon />

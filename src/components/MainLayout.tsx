@@ -43,6 +43,7 @@ export default function MainLayout() {
   };
 
   useEffect(() => {
+    console.log("pathname is", pathname);
     setPageTitle(getPageTitle(pathname));
   }, [pathname]);
 

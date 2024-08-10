@@ -34,6 +34,12 @@ export const fetchOneData = (label: string, id: number): Promise<AxiosResponse<R
   return client.get<ResponseData>(`/${label}/${id}`)
 }
 
+// GET ONE DATA BY PROJECT_ID
+export const fetchOneDataByProjectId = (label: string, project_id: number): Promise<AxiosResponse<ResponseData>> => {
+  return client.get<ResponseData>(`/${label}/by-project/${project_id}`)
+}
+
+
 // CREATE DATA
 export const createData = (label: string, data: DataPayload): Promise<AxiosResponse<ResponseData>> => {
   return client.post<DataPayload>(`/${label}`, data)
