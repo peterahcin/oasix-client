@@ -8,7 +8,8 @@ import IconBtn from "./IconBtn";
 import DeleteDataConfirmationModal from "./DeleteDataConfirmationModal";
 import AlertMessage, { AlertObj, initAlertData } from "../../Alert";
 import { Form } from "../../../types/forms";
-import { DataObject, Data } from "../../../types/data";
+import { TableDataObject, DataObject, Data } from "../../../types/data";
+import { fetchTableData } from "../../../api/rest/data";
 import "./pagination.css";
 import * as S from "./Table.styled";
 
@@ -19,13 +20,13 @@ interface PageChangeEvent {
 }
 
 const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
-  const [data, setData] = useState<DataObject[]>([]);
+  const [data, setData] = useState<TableDataObject[]>([]);
   const [tableHeaders, setTableHeaders] = useState<string[]>([]);
   const [listOfLongestHeaderWords, setListOfLongestHeaderWords] = useState<
     number[]
   >([]);
   const [fieldNames, setFieldNames] = useState<string[]>([]);
-  const [selectedEntry, setSelectedEntry] = useState<DataObject | null>(null);
+  const [projectId, setProjectId] = useState<number | null>(null);
   // pageNumber is 0 indexed for paginate
   const [pageNumber, setPageNumber] = useState(0);
   const [pageCount, setPageCount] = useState(0);
@@ -38,11 +39,11 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
 
   const handlePageClick = (event: PageChangeEvent) => {
     setPageNumber(event.selected);
-    fetchTableData(event.selected);
+    handleFetchTableData(event.selected);
   };
 
-  const handleEditClick = (item: DataObject) => {
-    handleSelectedEntry(item);
+  const handleEditClick = (id: number) => {
+    setProjectId(id);
   };
 
   const handleDeleteClick = async (id: Data) => {
@@ -52,11 +53,11 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
         const response = await deleteData(selectedForm.label, id);
         console.log("response from delete is", response);
         if (data.length === 1) {
-          fetchTableData(pageNumber - 1);
-          handleSelectedEntry(null);
+          handleFetchTableData(pageNumber - 1);
+          handleSetProjectId(null);
         } else {
-          fetchTableData(pageNumber);
-          handleSelectedEntry(null);
+          handleFetchTableData(pageNumber);
+          handleSetProjectId(null);
         }
       } catch (error) {
         console.error("Error deleting data.", error);
@@ -69,8 +70,8 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
     }
   };
 
-  const handleSelectedEntry = (entry: DataObject | null) => {
-    setSelectedEntry(entry);
+  const handleSetProjectId = (id: number | null) => {
+    setProjectId(id);
   };
 
   const handleOpenCloseDeleteDataModal = () => {
@@ -120,10 +121,10 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
   };
 
   //GET TABLE DATA BASED ON GROUP FORM ID, PAGE & SIZE
-  const fetchTableData = async (whatPage: number) => {
+  const handleFetchTableData = async (whatPage: number) => {
     if (selectedForm) {
       try {
-        const response = await fetchData(selectedForm.label, {
+        const response = await fetchTableData({
           page: whatPage + 1,
           size: itemsPerPage,
         });
@@ -146,25 +147,38 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
   //SET TABLE HEADERS BASED ON SELECTED FORM
   useEffect(() => {
     if (selectedForm) {
-      const headers = selectedForm.fields.map((field) => field.label);
-      setTableHeaders([...headers, "Created"]);
+      // const headers = selectedForm.fields.map((field) => field.label);
+      // setTableHeaders([...headers, "Created"]);
+      setTableHeaders([
+        "Name",
+        "Description",
+        "Owner",
+        "Created",
+        "Load Profile",
+        "Hot Water",
+        "Space Heating",
+        "Cooling",
+        "Cold Storage",
+        "Hot Storage",
+        "Heat Pump",
+      ]);
     } else {
       setTableHeaders([]);
     }
   }, [selectedForm]);
 
   //SET FIELDS BASED ON SELECTED FORM
-  useEffect(() => {
-    if (selectedForm) {
-      const rowFields = selectedForm.fields.map((field) => field.fieldName);
-      setFieldNames([...rowFields, "created_date"]);
-    }
-  }, [selectedForm]);
+  // useEffect(() => {
+  //   if (selectedForm) {
+  //     const rowFields = selectedForm.fields.map((field) => field.fieldName);
+  //     setFieldNames([...rowFields, "created_date"]);
+  //   }
+  // }, [selectedForm]);
 
   useEffect(() => {
     console.log("selectedForm is", selectedForm);
     if (selectedForm) {
-      fetchTableData(0);
+      handleFetchTableData(0);
     }
     // eslint-disable-next-line
   }, [selectedForm]);
@@ -189,6 +203,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
         listOfLongestWords.push(maxLength);
       }
       setListOfLongestHeaderWords(listOfLongestWords);
+      console.log("list of longest header words", listOfLongestHeaderWords);
     };
 
     if (tableHeaders.length) {
@@ -207,18 +222,26 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                     <S.HeaderRow
                       listOfLongestHeaderWords={listOfLongestHeaderWords}
                     >
-                      {tableHeaders && (
+                      {tableHeaders.length >= 1 && (
                         <>
-                          <S.HeaderCell />
+                          <S.HeaderCell
+                            style={{ minWidth: "34px", maxWidth: "34px" }}
+                          />
+                          <S.HeaderCell
+                            style={{ minWidth: "34px", maxWidth: "34px" }}
+                          />
+                          <S.HeaderCell
+                            style={{ minWidth: "34px", maxWidth: "34px" }}
+                          />
                           {tableHeaders.map((title: string, i: number) => (
                             <Tooltip key={`${title}-${i}`} title={title}>
                               <S.HeaderCell
                                 style={{
                                   minWidth: `${
-                                    listOfLongestHeaderWords[i] * 20
+                                    listOfLongestHeaderWords[i] * 24
                                   }px`,
                                   maxWidth: `${
-                                    listOfLongestHeaderWords[i] * 20
+                                    listOfLongestHeaderWords[i] * 24
                                   }px`,
                                 }}
                               >
@@ -231,7 +254,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                     </S.HeaderRow>
                   </S.Header>
                   <S.Body>
-                    {data.map((item: DataObject, i: number) => (
+                    {data.map((item: TableDataObject, i: number) => (
                       <S.Row
                         listOfLongestHeaderWords={listOfLongestHeaderWords}
                         key={i}
@@ -239,11 +262,14 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                           i === data.length - 1 ? { borderBottom: "none" } : {}
                         }
                       >
-                        <Tooltip title="delete entry">
+                        <Tooltip
+                          title="delete entry"
+                          style={{ minWidth: "34px", maxWidth: "34px" }}
+                        >
                           <S.Cell>
                             <IconBtn
                               onClick={() => {
-                                handleSelectedEntry(item);
+                                handleSetProjectId(item.project.id);
                                 handleOpenCloseDeleteDataModal();
                               }}
                             >
@@ -251,19 +277,168 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                             </IconBtn>
                           </S.Cell>
                         </Tooltip>
-
-                        {fieldNames.map((key, i) => {
+                        <Tooltip
+                          title="edit entry"
+                          style={{ minWidth: "34px", maxWidth: "34px" }}
+                        >
+                          <S.Cell>
+                            <IconBtn
+                              onClick={() => {
+                                handleSetProjectId(item.project.id);
+                              }}
+                            >
+                              <S.DeleteSimpleIcon />
+                            </IconBtn>
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip
+                          title="see results"
+                          style={{ minWidth: "34px", maxWidth: "34px" }}
+                        >
+                          <S.Cell>
+                            <IconBtn
+                              onClick={() => {
+                                handleSetProjectId(item.project.id);
+                              }}
+                            >
+                              <S.DeleteSimpleIcon />
+                            </IconBtn>
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.project.name}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[0] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[0] * 24}px`,
+                            }}
+                          >
+                            {item.project.name}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.project.description}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[1] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[1] * 24}px`,
+                            }}
+                          >
+                            {item.project.description}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.project.owner}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[2] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[2] * 24}px`,
+                            }}
+                          >
+                            {item.project.owner}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.project.created_date}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[3] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[3] * 24}px`,
+                            }}
+                          >
+                            {item.project.created_date}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.simulation_params.load_profile}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[4] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[4] * 24}px`,
+                            }}
+                          >
+                            {item.simulation_params.load_profile}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.simulation_params.hot_water}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[5] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[5] * 24}px`,
+                            }}
+                          >
+                            {item.simulation_params.hot_water}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.simulation_params.space_heating}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[6] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[6] * 24}px`,
+                            }}
+                          >
+                            {item.simulation_params.space_heating}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.simulation_params.cooling}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[7] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[7] * 24}px`,
+                            }}
+                          >
+                            {item.simulation_params.cooling}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip
+                          title={item.system_sizing.cold_storage_capacity}
+                        >
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[8] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[8] * 24}px`,
+                            }}
+                          >
+                            {item.system_sizing.cold_storage_capacity}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip
+                          title={item.system_sizing.hot_storage_capacity}
+                        >
+                          <S.Cell
+                            style={{
+                              minWidth: `${listOfLongestHeaderWords[9] * 24}px`,
+                              maxWidth: `${listOfLongestHeaderWords[9] * 24}px`,
+                            }}
+                          >
+                            {item.system_sizing.hot_storage_capacity}
+                          </S.Cell>
+                        </Tooltip>
+                        <Tooltip title={item.system_sizing.heat_pump_size}>
+                          <S.Cell
+                            style={{
+                              minWidth: `${
+                                listOfLongestHeaderWords[10] * 24
+                              }px`,
+                              maxWidth: `${
+                                listOfLongestHeaderWords[10] * 24
+                              }px`,
+                            }}
+                          >
+                            {item.system_sizing.heat_pump_size}
+                          </S.Cell>
+                        </Tooltip>
+                        {/* {fieldNames.map((key, i) => {
                           const itemKey = key as keyof ResponseData;
+
                           return (
-                            <Tooltip key={i} title={String(item[itemKey])}>
+                            <Tooltip
+                              key={i}
+                              title={getValue(item, itemKey, item[itemKey])}
+                            >
                               <S.Cell
                                 onClick={() => handleEditClick(item)}
                                 style={{
                                   minWidth: `${
-                                    listOfLongestHeaderWords[i] * 20
+                                    listOfLongestHeaderWords[i] * 24
                                   }px`,
                                   maxWidth: `${
-                                    listOfLongestHeaderWords[i] * 20
+                                    listOfLongestHeaderWords[i] * 24
                                   }px`,
                                 }}
                               >
@@ -271,7 +446,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                               </S.Cell>
                             </Tooltip>
                           );
-                        })}
+                        })} */}
                       </S.Row>
                     ))}
                   </S.Body>
@@ -304,8 +479,8 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
           </S.SubContainer>
 
           <DeleteDataConfirmationModal
-            handleSelectedEntry={handleSelectedEntry}
-            data={selectedEntry}
+            handleSetProjectId={handleSetProjectId}
+            id={projectId}
             toggleDeleteDataModal={handleOpenCloseDeleteDataModal}
             handleDeleteData={handleDeleteClick}
             open={deleteDataConfirmationModalOpen}

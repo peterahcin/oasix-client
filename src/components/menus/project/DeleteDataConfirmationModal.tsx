@@ -5,26 +5,26 @@ import * as S from "./ConfirmationModal.styled";
 
 const DeleteDataConfirmationModal = ({
   open,
-  data,
+  id,
   toggleDeleteDataModal,
   handleDeleteData,
-  handleSelectedEntry,
+  handleSetProjectId,
 }: {
   open: boolean;
-  data: null | DataObject;
+  id: number | null;
   toggleDeleteDataModal: () => void;
   handleDeleteData: (id: Data) => void;
-  handleSelectedEntry: (entry: DataObject | null) => void;
+  handleSetProjectId: (id: number | null) => void;
 }) => {
   return (
     <>
-      {data && (
+      {id && (
         <Modal
           sx={{ zIndex: "10000" }}
           open={open}
           onClose={() => {
             toggleDeleteDataModal();
-            handleSelectedEntry(null);
+            handleSetProjectId(null);
           }}
         >
           <S.ModalWrapper>
@@ -33,7 +33,7 @@ const DeleteDataConfirmationModal = ({
                 <IconBtn
                   onClick={() => {
                     toggleDeleteDataModal();
-                    handleSelectedEntry(null);
+                    handleSetProjectId(null);
                   }}
                 >
                   <S.CrossSimpleIcon />
@@ -47,7 +47,7 @@ const DeleteDataConfirmationModal = ({
                     small={true}
                     create={true}
                     onClick={() => {
-                      handleDeleteData(data.id);
+                      handleDeleteData(id);
                       toggleDeleteDataModal();
                     }}
                   >

@@ -56,13 +56,14 @@ export const HeaderRow = styled.tr<{
       transparent 100%
     ),
     radial-gradient(at 82% 65%, hsl(198, 100%, 50%) 0, transparent 55%);
-  display: grid;
+  /* display: grid;
   grid-template-columns: ${({ listOfLongestHeaderWords }) => {
     const columnWidths = listOfLongestHeaderWords.map(
       (wordLength) => `minmax(${wordLength * 20}px, auto)`
     );
     return [`minmax(35px, 35px)`, ...columnWidths].join(" ");
-  }};
+  }}; */
+  display: flex;
   padding: 0 8px;
   border-radius: 8px;
 `;
@@ -83,19 +84,19 @@ export const Row = styled.tr<{
 }>`
   display: flex;
   align-items: center;
-  display: grid;
-  grid-template-columns: ${({ listOfLongestHeaderWords }) => {
+  /* display: grid; */
+  /* grid-template-columns: ${({ listOfLongestHeaderWords }) => {
     const columnWidths = listOfLongestHeaderWords.map(
       (wordLength) => `minmax(${wordLength * 20}px, auto)`
     );
     return [`minmax(35px, 35px)`, ...columnWidths].join(" ");
-  }};
+  }}; */
   padding: 0 8px;
   border-radius: 8px;
 
   :hover {
     cursor: pointer;
-    background-color: ${Colors.black5};
+    background-color: #98e5d4;
     font-weight: 600;
   }
 `;

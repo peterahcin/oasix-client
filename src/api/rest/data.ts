@@ -9,6 +9,16 @@ export const fetchFormByLabel = (formName: string): Promise<AxiosResponse<Form>>
   return client.get<Form>(`/form_config/${formName}`);
 };
 
+//GET TABLE DATA
+export const fetchTableData = (data: {page?: number, size?: number}): Promise<AxiosResponse<FetchDataResponseData>> => {
+  const params: Record<string, number> = {}
+
+  if (data.page) params.page = data.page
+  if (data.size) params.size = data.size
+  
+  return client.get<FetchDataResponseData>(`/all_data`, {params});
+};
+
 // GET ALL DATA
 export const fetchData = (label: string,  data: {page?: number, size?: number}): Promise<AxiosResponse<FetchDataResponseData>> => {
   const params: Record<string, number> = {}
