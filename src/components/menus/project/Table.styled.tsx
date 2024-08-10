@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { ReactComponent as ArrowDownIcon } from "../../icons/arrow-down.svg";
+import { ReactComponent as EditIcon } from "../../../icons/edit-icon.svg";
+import { ReactComponent as ViewIcon } from "../../../icons/view-icon.svg";
 import { ReactComponent as DeleteSimpleIconIcons } from "../../../icons/trash-can-with-cover-svgrepo-com.svg";
 import { Colors } from "../../../styles/colors";
 import { FontSize } from "../../../styles/fontSize";
@@ -136,6 +138,18 @@ export const EmptyList = styled.tr`
 `;
 
 export const DeleteSimpleIcon = styled(DeleteSimpleIconIcons)`
+  fill: ${Colors.black75};
+  width: 16px;
+  height: 16px;
+`;
+
+export const EditSimpleIcon = styled(EditIcon)`
+  fill: ${Colors.black75};
+  width: 16px;
+  height: 16px;
+`;
+
+export const ViewSimpleIcon = styled(ViewIcon)`
   fill: ${Colors.black75};
   width: 16px;
   height: 16px;

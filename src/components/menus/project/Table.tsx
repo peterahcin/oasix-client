@@ -1,15 +1,13 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Tooltip } from "@mui/material";
-import { deleteData } from "../../../api/rest/data";
-import { ResponseData } from "../../../api/models/response/data";
-import { fetchData } from "../../../api/rest/data";
+import { DataContext } from "../../../context/context";
 import ReactPaginate from "react-paginate";
 import IconBtn from "./IconBtn";
 import DeleteDataConfirmationModal from "./DeleteDataConfirmationModal";
 import AlertMessage, { AlertObj, initAlertData } from "../../Alert";
 import { Form } from "../../../types/forms";
 import { TableDataObject, DataObject, Data } from "../../../types/data";
-import { fetchTableData } from "../../../api/rest/data";
+import { fetchTableData, deleteData } from "../../../api/rest/data";
 import "./pagination.css";
 import * as S from "./Table.styled";
 
@@ -26,7 +24,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
     number[]
   >([]);
   const [fieldNames, setFieldNames] = useState<string[]>([]);
-  const [projectId, setProjectId] = useState<number | null>(null);
+  const { projectId, setProjectId } = useContext(DataContext);
   // pageNumber is 0 indexed for paginate
   const [pageNumber, setPageNumber] = useState(0);
   const [pageCount, setPageCount] = useState(0);
@@ -287,7 +285,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                                 handleSetProjectId(item.project.id);
                               }}
                             >
-                              <S.DeleteSimpleIcon />
+                              <S.EditSimpleIcon />
                             </IconBtn>
                           </S.Cell>
                         </Tooltip>
@@ -301,7 +299,7 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                                 handleSetProjectId(item.project.id);
                               }}
                             >
-                              <S.DeleteSimpleIcon />
+                              <S.ViewSimpleIcon />
                             </IconBtn>
                           </S.Cell>
                         </Tooltip>
@@ -335,14 +333,14 @@ const Table = ({ selectedForm }: { selectedForm: Form | null }) => {
                             {item.project.owner}
                           </S.Cell>
                         </Tooltip>
-                        <Tooltip title={item.project.created_date}>
+                        <Tooltip title={formatDate(item.project.created_date)}>
                           <S.Cell
                             style={{
                               minWidth: `${listOfLongestHeaderWords[3] * 24}px`,
                               maxWidth: `${listOfLongestHeaderWords[3] * 24}px`,
                             }}
                           >
-                            {item.project.created_date}
+                            {formatDate(item.project.created_date)}
                           </S.Cell>
                         </Tooltip>
                         <Tooltip title={item.simulation_params.load_profile}>

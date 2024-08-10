@@ -40,7 +40,7 @@ const DeleteDataConfirmationModal = ({
                 </IconBtn>
               </S.ModalButtonWrapper>
               <S.Container>
-                <S.Text>test</S.Text>
+                <S.Text>Are you sure you want to delete this project?</S.Text>
 
                 <S.ButtonContainer>
                   <S.Button
@@ -51,14 +51,14 @@ const DeleteDataConfirmationModal = ({
                       toggleDeleteDataModal();
                     }}
                   >
-                    Potrdi
+                    Delete
                   </S.Button>
                   <S.Button
                     small={true}
                     cancel={true}
                     onClick={() => toggleDeleteDataModal()}
                   >
-                    Prekliči
+                    Cancel
                   </S.Button>
                 </S.ButtonContainer>
               </S.Container>
